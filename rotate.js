@@ -43,18 +43,18 @@ function multipleMatrix(a, b) {
         console.error("Can't multiple " + a + " and " + b);
     }
     let output = Array(a.length);
-    output.forEach(element => {
-        element = Array(b[0].length);
-        element.forEach(el => {
-            el = 0;
-        });
-    });
+    for(let i = 0; i < output.length; i++) {
+        output[i] = Array(b[0].length);
+        for(let j = 0; j < output.length; j++) {
+            output[j] = 0;
+        };
+    };
 
-
+    alert(JSON.stringify(output));
     for (let i = 0; i < a.length; i++) {
         for (let j = 0; j < b[0].length || j == 0; i++) {
             for (let k = 0; k < a.length; k++) {
-                if (output[0].isArray()) {
+                if (Array.isArray(output[0])) {
                     output[i][k] += a[i][k] * b[j][k];
                 } else {
 
@@ -67,7 +67,7 @@ function multipleMatrix(a, b) {
 }
 
 function getValue(arr, i, j) {
-    if (arr[i].isArray()) {
+    if (Array.isArray(arr[i])) {
         return [i][j];
     } else {
         return [i];
