@@ -1,18 +1,19 @@
 var cube = [
     [0, 0,0],
-    [1, 0,0],
-    [1, 1,0],
-    [0, 1,0]
+    [100, 0,0],
+    [100, 100,0],
+    [0, 100,0]
 ];
 var lineColor = "#000000";
 var size = 100;
+var rot = 6;
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
-draw();
-
+    draw();
 function draw() {
-    console.log("begindraw");
+    requestAnimationFrame(draw);
+    context.clearRect(0,0,canvas.width,canvas.height);
     context.beginPath();
     context.moveTo(cube[0][0], cube[0][1]);
     for (var i = 1; i < cube.length; i++) {
@@ -25,13 +26,14 @@ function draw() {
     context.strokeStyle = lineColor;
     context.lineWidth = 3;
     context.stroke();
+    rot += 0.02;
 }
 
 function getTrans() {
     trans = [
-        [100, 0, 0],
-        [0, 100, 0],
-        [0, 0, 1]
+        [Math.cos(rot), -Math.sin(rot), 0],
+        [Math.sin(rot), Math.cos(rot), 0],
+        [0, 0, 0]
     ];
     return trans
 }
@@ -52,10 +54,10 @@ function multipleMatrix(a, b) {
         for (let j = 0; j < b[0].length || j == 0; j++) {
             for (let k = 0; k < a.length; k++) {
                 if (Array.isArray(output[0])) {
-                    output[i][k] += a[i][k] * b[j][k];
+                    output[i][k] += a[i][k] * b[k][j];
                 } else {
 
-                    output[i] += getValue(a, i, k) * getValue(b, j, k);
+                    output[i] += getValue(a, i, k) * getValue(b,k, j);
                 }
             }
         }
