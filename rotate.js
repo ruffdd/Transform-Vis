@@ -1,17 +1,14 @@
 var cube = [
-    [0, 0],
-    [1, 0],
-    [1, 1],
-    [0, 1]
+    [0, 0,0],
+    [1, 0,0],
+    [1, 1,0],
+    [0, 1,0]
 ];
 var lineColor = "#000000";
 var size = 100;
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-for (i = 1; i < cube.length; i++) {
-    cube[i][0] *= size;
-    cube[i][1] *= size;
-}
+
 draw();
 
 function draw() {
@@ -20,10 +17,10 @@ function draw() {
     context.moveTo(cube[0][0], cube[0][1]);
     for (var i = 1; i < cube.length; i++) {
         var point = multipleMatrix(getTrans(), cube[i]);
-        alert(point);
         context.lineTo(point[0], point[1]);
+        console.log(cube[i]);
+        console.log(point);
     }
-
     context.closePath();
     context.strokeStyle = lineColor;
     context.lineWidth = 3;
@@ -32,8 +29,9 @@ function draw() {
 
 function getTrans() {
     trans = [
-        [10, 0],
-        [0, 10]
+        [100, 0, 0],
+        [0, 100, 0],
+        [0, 0, 1]
     ];
     return trans
 }
@@ -43,16 +41,15 @@ function multipleMatrix(a, b) {
         console.error("Can't multiple " + a + " and " + b);
     }
     let output = Array(a.length);
-    for(let i = 0; i < output.length; i++) {
+    for (let i = 0; i < output.length; i++) {
         output[i] = Array(b[0].length);
-        for(let j = 0; j < output.length; j++) {
+        for (let j = 0; j < output.length; j++) {
             output[j] = 0;
         };
     };
 
-    alert(JSON.stringify(output));
     for (let i = 0; i < a.length; i++) {
-        for (let j = 0; j < b[0].length || j == 0; i++) {
+        for (let j = 0; j < b[0].length || j == 0; j++) {
             for (let k = 0; k < a.length; k++) {
                 if (Array.isArray(output[0])) {
                     output[i][k] += a[i][k] * b[j][k];
@@ -68,9 +65,9 @@ function multipleMatrix(a, b) {
 
 function getValue(arr, i, j) {
     if (Array.isArray(arr[i])) {
-        return [i][j];
+        return arr[i][j];
     } else {
-        return [i];
+        return arr[i];
     }
 }
 
