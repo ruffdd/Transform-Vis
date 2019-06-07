@@ -19,8 +19,8 @@ function draw() {
     for (var i = 1; i < cube.length; i++) {
         var point = multipleMatrix(getTrans(), cube[i]);
         context.lineTo(point[0], point[1]);
-        console.log(cube[i]);
-        console.log(point);
+        //console.log(cube[i]);
+        //console.log(point);
     }
     context.closePath();
     context.strokeStyle = lineColor;
